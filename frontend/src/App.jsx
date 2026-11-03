@@ -1,41 +1,34 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
-import AdminDashboard from './pages/AdminDashboard'
-import DynamicQR from './pages/DynamicQR'
-import Login from './pages/Login'
-import MarkAttendance from './pages/MarkAttendance'
-import StartSession from './pages/StartSession'
-import StudentDashboard from './pages/StudentDashboard'
-import TeacherDashboard from './pages/TeacherDashboard'
-import TodayClasses from './pages/TodayClasses'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Login from './pages/Login';
+import StudentDashboard from './pages/StudentDashboard';
+import TeacherDashboard from './pages/TeacherDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import TodayClasses from './pages/TodayClasses';
+import StartSession from './pages/StartSession';
+import DynamicQR from './pages/DynamicQR';
+import MarkAttendance from './pages/MarkAttendance';
 
-  return(
-     <div>
-      <Header_component />
+import './App.css';
 
+export default function App() {
+  return (
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/admindashboard" element={<AdminDashboard />}></Route>
-        <Route path="/dynamicqr" element={<DynamicQR />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/markattendance" element={<MarkAttendance />}></Route>
-        <Route path="/startsession" element={<StartSession />}></Route>
-        <Route path="/studentdashboard" element={<StudentDashboard />}></Route>
-        <Route path="/teacherdashboard" element={<TeacherDashboard />}></Route>
-        <Route path="/todayclasses" element={<TodayClasses />}></Route>
+        <Route path="/" element={<Login />} />
 
-      
+        <Route path="/student" element={<StudentDashboard />} />
+        <Route path="/student/classes" element={<TodayClasses />} />
+        <Route path="/student/attendance" element={<MarkAttendance />} />
+
+        <Route path="/teacher" element={<TeacherDashboard />} />
+        <Route path="/teacher/start-session" element={<StartSession />} />
+        <Route path="/teacher/qr" element={<DynamicQR />} />
+
+        <Route path="/admin" element={<AdminDashboard />} />
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-
-      <Footer_component />
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
-
-export default App
